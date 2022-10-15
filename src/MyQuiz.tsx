@@ -1,8 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { MathComponent } from 'mathjax-react';
-
 import Box from '@mui/material/Box';
-import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
@@ -15,6 +12,8 @@ import Divider from '@mui/material/Divider';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import LinearProgress from '@mui/material/LinearProgress';
 
+import QuestionBody from './components/QuestionBody';
+import Header from './components/Header';
 
 
 
@@ -39,7 +38,7 @@ const [selectedIndex,setSelectedIndex] = useState('1');
             setProgress((oldProgress) => {
                 if (oldProgress === 102) {
                     setSelectedIndex((parseInt(selectedIndex)+1).toString());
-                    return 0;
+                    return 0;                  
                 }
   console.log('progress=='+oldProgress);
                 return oldProgress+1;
@@ -64,47 +63,7 @@ setSelectedIndex(text);
   return (
     <Box sx={{ width: '80%',margin:'auto',padding:1,height:500,alignSelf:'center', border:3,borderColor:'#29476a',alignItems:'center',justifyContent:'center' }}>
    
-<Paper
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-start',
-        flexWrap: 'wrap',
-        height:90,
-        width:'100%',
-        p: 0.5,
-        m: 0,        
-        backgroundColor:'#407392'
-      }}      
-    >
-
-
-<img src={require('./assets/images/nioclass-logo2.png')}
-    style={{width:70, height:70,borderRadius:35,marginTop:6,marginLeft:5}}
-    />
-
-<Typography sx={{color:'white',fontSize:22,fontFamily:'OpenSansSemiBold',marginTop:4,marginLeft:2}}>
-
-NioClass
-</Typography>
-
-<Breadcrumbs maxItems={2} aria-label="breadcrumb" sx={{color:'white',fontSize:16,fontFamily:'OpenSansSemiBold',marginBottom:2,display:'flex',alignItems:'flex-end',alignSelf:'flex-end',marginLeft:45}}>
-        <Link underline="hover" color="inherit" href="#">
-          Home
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Settings
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Extra
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Profile
-        </Link>
-        
-      </Breadcrumbs>
-
-
-</Paper>
+<Header />
 
 <Divider/>
 <Paper
@@ -252,53 +211,8 @@ NioClass
 </Paper>
 
 <Divider/>
-<Paper
-      style={{margin:'0 auto'}}
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignSelf:'flex-start',
-        alignItems:'flex-start',
-        flexWrap: 'wrap',        
-        width:'100%',
-        height:140,
-        backgroundColor:'#ebf1f4',
-        p: 0.5,
-        m: 0,
-      }}      
-    >
-&emsp;
 
-<MathComponent display={false} tex={String.raw`ax^{4}+bx^{3}-x^{2}+2x+3`} />
-<Typography  sx={{fontSize:15,fontFamily:'OpenSansRegular'}}> &emsp; has remainder &emsp; </Typography>
-<MathComponent display={false} tex={String.raw`4x+3`} />
-<Typography  sx={{fontSize:15,fontFamily:'OpenSansRegular'}}> &emsp; when divided by &emsp; </Typography>
-<MathComponent display={false} tex={String.raw`x^2+x-2`} />
-
-<Paper
-      style={{margin:'0 auto'}}
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignSelf:'center',
-        alignItems:'center',
-        flexWrap: 'wrap',        
-        width:'20%',
-        position:'relative',
-        left:-460,
-        top:10,
-        height:40,
-        backgroundColor:'#ebf1f4',
-        p: 0.5,
-        m: 0,
-      }}      
-    >
-&emsp;
-<MathComponent display={false} tex={String.raw`a+4b= ?`} />
-</Paper>
-</Paper>
-
-
+{(selectedIndex==='1') && <QuestionBody />}
 
 <Box sx={{ width: '100%' }}>
       <LinearProgress 
