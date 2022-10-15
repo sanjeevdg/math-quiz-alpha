@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'OpenSansSemiBold';
+  src: local('OpenSansSemiBold'), url(./assets/fonts/OpenSans-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: local('OpenSansBold'), url(./assets/fonts/OpenSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: local('OpenSansRegular'), url(./assets/fonts/OpenSans-Regular.ttf) format('truetype');
+}
+
+
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
+
+
 .App {
   text-align: center;
 }
