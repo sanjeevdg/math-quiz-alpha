@@ -36,20 +36,10 @@ return (
 NioClass
 </Typography>
 
-<Breadcrumbs maxItems={2} aria-label="breadcrumb" sx={{color:'white',fontSize:16,fontFamily:'OpenSansSemiBold',marginBottom:2,display:'flex',alignItems:'flex-end',alignSelf:'flex-end',marginLeft:45}}>
+<Breadcrumbs maxItems={1} aria-label="breadcrumb" sx={{color:'white',fontSize:16,fontFamily:'OpenSansSemiBold',marginBottom:2,display:'flex',alignItems:'flex-end',alignSelf:'flex-end',marginLeft:45}}>
         <Link underline="hover" color="inherit" href="#">
           Home
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Settings
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Extra
-        </Link>
-        <Link underline="hover" color="inherit" href="#">
-          Profile
-        </Link>
-        
+        </Link>        
       </Breadcrumbs>
 
 
