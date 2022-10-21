@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 */
 
 
-export default function StepThree({question,currStep,currQuestion,chooseStep}) {
+export default function StepSix({question,currStep,currQuestion,chooseStep}) {
 
 
 //console.log('PROPS',props);

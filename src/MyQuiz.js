@@ -183,6 +183,12 @@ setShowStep3(true);
 if (currStep===4)
 setShowStep4(true);
 
+if (currStep===5)
+setShowStep5(true);
+
+if (currStep===6)
+setShowStep6(true);
+
 
 }
 //https://cgfk9jngd6.execute-api.ap-northeast-1.amazonaws.com/Staging/secondlambdafunctionresoruce/
@@ -334,24 +340,50 @@ setSelectedIndex(text);
         alignItems:'flex-start',
         flexWrap: 'wrap',        
         width:'100%',
-        height:1100,
+        height:1000,
         backgroundColor:'#ffffff',
         p: 0.5,
         m: 0}} style={{margin:'0 auto'}}>
+
 <Box>
+
+{(showStep1) && 
 <Box>
-{(showStep1) && <StepOne chooseStep={chooseStep} question={questionList[currQuestion]} currQuestion={currQuestion} currStep={currStep}/>}
-</Box><Box>
-{(showStep2) && <StepTwo chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>}
-</Box><Box>
-{(showStep3) && <StepThree chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>}
-</Box><Box>
-{(showStep4) && <StepFour chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>}
-</Box><Box>
-{(showStep5) && <StepFive chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>}
-</Box><Box>
-{(showStep6) && <StepSix chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>}
+    <StepOne chooseStep={chooseStep} question={questionList[currQuestion]} currQuestion={currQuestion} currStep={currStep}/>
 </Box>
+}
+
+
+{(showStep2) &&
+    <Box>
+ <StepTwo chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
+</Box>
+}
+
+{(showStep3) && 
+<Box>
+<StepThree chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
+</Box>
+}
+
+{(showStep4) && 
+<Box>
+<StepFour chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
+</Box>
+}
+
+{(showStep5) && 
+    <Box>
+<StepFive chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
+</Box>
+}
+
+{(showStep6) && 
+<Box>
+<StepSix chooseStep={chooseStep} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
+</Box>
+}
+
 </Box>
 {/* ((currStep===0 && showStep1) || (currStep===1 && showStep2) || (currStep===2 && showStep3)) */}
 
@@ -483,23 +515,27 @@ style={{
     </Button></Box>
 }
 
-{/*   */}
+{/* (currStep !== 4 ) &&   */}
 
 {showStepBtn && !showFeedbackBtn && 
- (currStep !== 4) && 
- (currStep+1 <= currNumSteps) &&
+  (currStep+1 <= currNumSteps) &&
 <Box style={{position:'absolute',top:sbtop,left:sbleft}}>
 <Button 
     onClick={()=>{
         setShowFeedbackBtn(true);
         setShowStepBtn(false); 
+        
+        setCurrStep(currStep+1);
+
         if(currStep===0)setShowStep1(true); 
         if(currStep===1)setShowStep2(true);
         if(currStep===2)setShowStep3(true);
         if(currStep===3)setShowStep4(true);
         if(currStep===4)setShowStep5(true);
         if(currStep===5)setShowStep6(true);
-        setCurrStep(currStep+1);}}
+
+
+    }}
 style={{ 
     border:0,width:130,height:36,
     borderRadius:18,backgroundColor:'#407392',

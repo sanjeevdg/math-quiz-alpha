@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 */
 
 
-export default function StepThree({question,currStep,currQuestion,chooseStep}) {
+export default function StepFour({question,currStep,currQuestion,chooseStep}) {
 
 
 //console.log('PROPS',props);
