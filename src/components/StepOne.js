@@ -17,10 +17,6 @@ let restr = question.Step1;
 // const wrokrgx = new RegExp('/\\\\]\\\\[/ig','g');
 //const wrokrgx = new RegExp('/\\\]\\\[/g','g');
 
-function escapeRegExp(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-}
-
 
 // restr = restr.replaceAll(wrokrgx, '');
 //restr = restr.replaceAll(regex2, '');
@@ -34,14 +30,14 @@ console.log('yyyyyyyys',restr);
 return (
 <>
 
-{(currStep !== 0)?
+{(currStep === 1) &&
 <><Box sx={{flexDirection:'column',marginLeft:5,marginTop:5}}>
 <Typography sx={{color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Step 1:</Typography>
 </Box>
 <Box sx={{flexDirection:'column',marginLeft:5,marginTop:5}}>
 <MathComponent display={true} tex={restr} />
-</Box></>:<></>}
+</Box></>}
 
 </>
 );

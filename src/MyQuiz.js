@@ -81,19 +81,20 @@ async function getQuestionList() {
 let myresp = await axios.get('https://cgfk9jngd6.execute-api.ap-northeast-1.amazonaws.com/Staging/abc');
         setQuestionList(myresp.data);
         setIsLoaded(true);
-   
-if (myresp.data[currQuestion].Step5.length != 0)
-setCurrNumSteps(5);
-if (myresp.data[currQuestion].Step5.length == 0)
-setCurrNumSteps(4);
-if (myresp.data[currQuestion].Step4.length ==0)
-setCurrNumSteps(3);
-if (myresp.data[currQuestion].Step3.length ==0)
+setCurrQuestion(0);
+
+if (myresp.data[currQuestion].Step1.length !== 0)
+setCurrNumSteps(1);
+if (myresp.data[currQuestion].Step2.length !== 0)
 setCurrNumSteps(2);
-if (myresp.data[currQuestion].Step2.length == 0)
-setCurrNumSteps(1);
-if (myresp.data[currQuestion].Step1.length == 0)
-setCurrNumSteps(1);
+if (myresp.data[currQuestion].Step3.length !==0)
+setCurrNumSteps(3);
+if (myresp.data[currQuestion].Step4.length !==0)
+setCurrNumSteps(4);
+if (myresp.data[currQuestion].Step5.length !== 0)
+setCurrNumSteps(5);
+
+
 
 
 
@@ -108,25 +109,23 @@ getQuestionList();
 
 useEffect(() => {
 
-setCurrQuestion(0);
+
 
 },[]);
 
 useEffect(() => {
     if (isLoaded) {
 
-if (questionList[currQuestion].Step5.length != 0)
-setCurrNumSteps(5);
-if (questionList[currQuestion].Step5.length == 0)
-setCurrNumSteps(4);
-if (questionList[currQuestion].Step4.length ==0)
-setCurrNumSteps(3);
-if (questionList[currQuestion].Step3.length ==0)
+if (questionList[currQuestion].Step1.length !== 0)
+setCurrNumSteps(1);
+if (questionList[currQuestion].Step2.length !== 0)
 setCurrNumSteps(2);
-if (questionList[currQuestion].Step2.length == 0)
-setCurrNumSteps(1);
-if (questionList[currQuestion].Step1.length == 0)
-setCurrNumSteps(1);
+if (questionList[currQuestion].Step3.length !==0)
+setCurrNumSteps(3);
+if (questionList[currQuestion].Step4.length !==0)
+setCurrNumSteps(4);
+if (questionList[currQuestion].Step5.length !== 0)
+setCurrNumSteps(5);
 
 
 }
@@ -145,20 +144,26 @@ useEffect(() => {
         if (currStep===5) setNbleft(190);
 
 
-
+if (currStep===1) setNbtop(1280);
+if (currStep===2) setNbtop(1280);
+        if (currStep===3) setNbtop(1280); 
         if (currStep===4) setNbtop(1280);
         if (currStep===5) setNbtop(1280);
+
+
 
         if (currStep===0) setSbleft(190);
         if (currStep===1) setSbleft(190);
         if (currStep===2) setSbleft(190);
         if (currStep===3) setSbleft(190);
+        if (currStep===4) setSbleft(190);
 
 
-        if (currStep===0) setSbtop(400);
+        if (currStep===0) setSbtop(450);
         if (currStep===1) setSbtop(900);
         if (currStep===2) setSbtop(1100);
-        if (currStep===3) setSbtop(1100);
+        if (currStep===3) setSbtop(1200);
+        if (currStep===4) setSbtop(1100);
 
 
 
@@ -400,9 +405,9 @@ setSelectedIndex(text);
         if (currStep===0)setShowStep1(true);
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
-        if (currStep===3)setShowStep3(true);
-        if (currStep===4)setShowStep3(true);
-        if (currStep===5)setShowStep3(true);
+        if (currStep===3)setShowStep4(true);
+        if (currStep===4)setShowStep5(true);
+        
     }}
 style={{
     border:0,width:130,height:42,
@@ -418,9 +423,9 @@ style={{
         if (currStep===0)setShowStep1(true);
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
-        if (currStep===3)setShowStep3(true);
-        if (currStep===4)setShowStep3(true);
-        if (currStep===5)setShowStep3(true);
+        if (currStep===3)setShowStep4(true);
+        if (currStep===4)setShowStep5(true);
+        
     }}
 style={{
     border:0,width:130,height:42,
@@ -437,9 +442,9 @@ style={{
         if (currStep===0)setShowStep1(true);
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
-        if (currStep===3)setShowStep3(true);
-        if (currStep===4)setShowStep3(true);
-        if (currStep===5)setShowStep3(true);
+        if (currStep===3)setShowStep4(true);
+        if (currStep===4)setShowStep5(true);
+        
     }}
 style={{
     border:0,width:130,height:42,
@@ -518,6 +523,7 @@ style={{
 {/* (currStep !== 4 ) &&   */}
 
 {showStepBtn && !showFeedbackBtn && 
+    !(currStep === currNumSteps) &&
   (currStep+1 <= currNumSteps) &&
 <Box style={{position:'absolute',top:sbtop,left:sbleft}}>
 <Button 

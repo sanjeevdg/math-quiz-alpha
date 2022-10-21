@@ -39,20 +39,20 @@ Result 3:</Typography>
 <MathComponent display={false} tex={'\\displaylines {'+restr+'}'} />
 </Box>
 
-{ (question.Explanation3 !== '')?
+{ (question.Explanation3.length !== 0) &&
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Explanation 3:</Typography>
 <MathComponent display={false} tex={'\\displaylines {'+question.Explanation3+'}'} />
-</Box>:<></>
+</Box>
 }
 
-{(currStep===3)?
+{(currStep===3) && (question.Step4.length !== 0) &&
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Step 4:</Typography>
 <MathComponent display={false} tex={question.Step4} />
-</Box>:<></>
+</Box>
 }
     </>
 );

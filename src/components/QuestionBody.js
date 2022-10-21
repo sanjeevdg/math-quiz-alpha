@@ -16,20 +16,7 @@ export default function QuestionBody({question,currStep,currQuestion}) {
 
 console.log("currStep="+currStep+"currQuestion="+currQuestion);
 let qstr = question.Question;
-//const rega = new RegExp('/\\\\\\]\\\\\\[/g','g');
 
-//qstr = qstr.replaceAll(rega, '');
-function replaceAll(string, search, replace) {
-  return string.split(search).join(replace);
-}
-
-qstr = qstr.replaceAll(qstr,"\\","\]");
-qstr = qstr.replaceAll(qstr,"\\","\]");
-console.log('QSTRBEFORE>>',qstr);
-
-qstr = '\\displaylines {' + qstr + '}';
-
-console.log('QSTRAFTER>>',qstr);
 
 return (
 
@@ -40,7 +27,7 @@ return (
         alignItems:'flex-start',
         flexWrap: 'wrap',        
         width:'100%',
-        height:200,
+        height:250,
         backgroundColor:'#ebf1f4',
         p: 0.5,
         m: 0}} style={{margin:'0 auto'}}      
@@ -48,6 +35,7 @@ return (
 
 <Box sx={{marginLeft:2,marginTop:2}}>
  <MathComponent display={false} tex={'\\displaylines {' + question.Question + '}'}/> 
+
 }
 </Box>
  <Paper elevation={0} sx={{
