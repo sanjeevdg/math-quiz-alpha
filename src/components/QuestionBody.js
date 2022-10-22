@@ -12,9 +12,6 @@ import Divider from '@mui/material/Divider';
 
 export default function QuestionBody({question,currStep,currQuestion}) {
 
-//console.log('MYQQQ',question);
-
-console.log("currStep="+currStep+"currQuestion="+currQuestion);
 let qstr = question.Question;
 
 
@@ -27,13 +24,16 @@ return (
         alignItems:'flex-start',
         flexWrap: 'wrap',        
         width:'100%',
-        height:250,
+        height:150,
+        overflow: 'hidden',
+        overflowY: 'scroll',
         backgroundColor:'#ebf1f4',
         p: 0.5,
         m: 0}} style={{margin:'0 auto'}}      
     >
 
 <Box sx={{marginLeft:2,marginTop:2}}>
+
  <MathComponent display={false} tex={'\\displaylines {' + question.Question + '}'}/> 
 
 }

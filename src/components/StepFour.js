@@ -4,32 +4,22 @@ import Typography from '@mui/material/Typography';
 import { MathComponent } from 'mathjax-react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-
-/*
-
-
-*/
+import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone';
+import ExpandCircleDownTwoToneIcon from '@mui/icons-material/ExpandCircleDownTwoTone';
 
 
-export default function StepFour({question,currStep,currQuestion,chooseStep}) {
 
 
-//console.log('PROPS',props);
+export default function StepFour({question,currStep,currQuestion,showFeedbackBtn,showStepBtn}) {
 
-//const [mycurrStep,setMyCurrStep] = useState(props.currStep);
+
+const [showExplanationThree, setShowExplanationThree] = useState(false);
+
+
 
 let restr = question.Result3;
-
 const regex = new RegExp('/\\frac/ig','g');
-
 restr = restr.replaceAll(regex, '');
-
-console.log('REST0000',restr);
-//restr = restr.replaceAll(restr,'\\frac','\frac');
-
-//console.log('RESTFFFFF',restr);
-
-
 
 return (
 <>
@@ -43,11 +33,18 @@ Result 3:</Typography>
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Explanation 3:</Typography>
+{!showExplanationThree && <Box sx={{display:'flex',flexGrow:1,width:300,position:'relative',left:200,top:-25}}><Typography style={{fontSize:14,color:'#000000',fontFamily:'OpenSansRegular',marginTop:2}}>Show explanation&nbsp;</Typography><ExpandCircleDownTwoToneIcon onClick={() => setShowExplanationThree(true)}/></Box>}
+
+
+{showExplanationThree && 
+    <>
 <MathComponent display={false} tex={'\\displaylines {'+question.Explanation3+'}'} />
+<Box sx={{borderRadius:10,backgroundColor:'#bdbdbd',display:'flex',flexGrow:1,width:200,position:'relative',left:600,top:-25}}><Typography style={{fontSize:14,color:'#000000',fontFamily:'OpenSansRegular',marginTop:2}}>&nbsp;&nbsp;Hide explanation</Typography><ExpandLessTwoToneIcon onClick={() => setShowExplanationThree(false)}/></Box>
+</> }
 </Box>
 }
 
-{(currStep===3) && (question.Step4.length !== 0) &&
+{ (currStep <= 4 && showFeedbackBtn) && (question.Step4.length !== 0) &&
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Step 4:</Typography>
