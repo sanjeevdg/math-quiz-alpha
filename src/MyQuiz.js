@@ -126,25 +126,26 @@ const MyButton = styled(Button)({
             setProgress((oldProgress) => {
                 if (oldProgress === 102) {
         if (!(currStep>=currNumSteps) && additionalTimerFlag){
-              setCurrStep(currStep+1);
-                setAdditionalTimerFlag(false);
+            setCurrStep(currStep+1);
+            setAdditionalTimerFlag(false);
+            if(currStep===0)setShowStep1(true); 
+            if(currStep===1)setShowStep2(true);
+            if(currStep===2)setShowStep3(true);
+            if(currStep===3)setShowStep4(true);
+            if(currStep===4)setShowStep5(true);
+            if(currStep===5)setShowStep6(true);
         }
-      
+             
         if (currStep === currNumSteps)
         setShowStepBtn(true);         
         else {
             setShowFeedbackBtn(true);
             setShowStepBtn(false); 
         }
-                    
         
-        if(currStep===0)setShowStep1(true); 
-        if(currStep===1)setShowStep2(true);
-        if(currStep===2)setShowStep3(true);
-        if(currStep===3)setShowStep4(true);
-        if(currStep===4)setShowStep5(true);
-        if(currStep===5)setShowStep6(true);
+        setAdditionalTimerFlag(false);             
         
+            
         setProgress(0);
 
                     return 0;                  
