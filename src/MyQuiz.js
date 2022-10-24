@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import FunctionsIcon from '@mui/icons-material/Functions';
+import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
@@ -22,18 +23,22 @@ import StepThree from './components/StepThree';
 import StepFour from './components/StepFour';
 import StepFive from './components/StepFive';
 import StepSix from './components/StepSix';
+import FinalScreen from './components/FinalScreen';
 
+import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
 import { MathComponent } from 'mathjax-react';
 import Modal from '@mui/material/Modal';
 
+import { useNavigate } from "react-router-dom";
+
 const style = {
   position: 'absolute',
-  top: '85%',
-  left: '85%',
+  top: '65%',
+  left: '86.5%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 365,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -64,12 +69,15 @@ const [currNumSteps,setCurrNumSteps] = useState(-1);
 const [showStepBtn, setShowStepBtn] = useState(true);
 const [showFeedbackBtn,setShowFeedbackBtn] = useState(false);
 
-const [open, setOpen] = React.useState(false);
+const [openFeedbackModal, setOpenFeedbackModal] = React.useState(false);
 const [additionalTimerFlag, setAdditionalTimerFlag] = useState(false);
 
+const [maxQuestions, setMaxQuestions] = useState(5);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+let navigate = useNavigate();
+
+  const handleOpenFeedbackModal = () => setOpenFeedbackModal(true);
+  const handleCloseFeedbackModal = () => setOpenFeedbackModal(false);
 
 useEffect(() => {
 
@@ -80,7 +88,7 @@ let myresp = await axios.get('https://cgfk9jngd6.execute-api.ap-northeast-1.amaz
         setQuestionList(myresp.data);
         setIsLoaded(true);
         setCurrQuestion(0);
-
+        setMaxQuestions(10);
 if (myresp.data[currQuestion].Step1.length !== 0)
         setCurrNumSteps(1);
 if (myresp.data[currQuestion].Step2.length !== 0)
@@ -184,57 +192,13 @@ const MyButton = styled(Button)({
       sx={{border:3,borderColor:'#407392',borderRadius:2}}
       aria-label="text alignment"
     >
-<MyButton value="1"
+ {  [...Array(maxQuestions)].map((val,k) => (
 
-       sx={{width:70,height:35,backgroundColor:currQuestion>=0?'#407392': 'white',color:currQuestion>=0?'white': '#407392'}} 
-       >   1
-      </MyButton>
-<MyButton value="2"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=1?'#407392': 'white',color:currQuestion>=1?'white': '#407392'}} 
-       >   2
-      </MyButton>
-
-
-
-<MyButton value="3"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=2?'#407392': 'white',color:currQuestion>=2?'white': '#407392'}} 
-       >   3
-      </MyButton>
-
-<MyButton value="4"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=3?'#407392': 'white',color:currQuestion>=3?'white': '#407392'}} 
-       >   4
-      </MyButton>
-
-<MyButton value="5"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=4?'#407392': 'white',color:currQuestion>=4?'white': '#407392'}} 
-       >   5
-      </MyButton>
-
-<MyButton value="6"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=5?'#407392': 'white',color:currQuestion>=5?'white': '#407392'}} 
-       >   6
-      </MyButton>
-
-<MyButton value="7"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=6?'#407392': 'white',color:currQuestion>=6?'white': '#407392'}} 
-       >   7
-      </MyButton>
-      
-<MyButton value="8"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=7?'#407392': 'white',color:currQuestion>=7?'white': '#407392'}} 
-       >   8
-      </MyButton>
-
-<MyButton value="9"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=8?'#407392': 'white',color:currQuestion>=8?'white': '#407392'}} 
-       >   9
-      </MyButton>
-      
-<MyButton value="10"
-       sx={{width:70,height:35,backgroundColor:currQuestion>=9?'#407392': 'white',color:currQuestion>=9?'white': '#407392'}} 
-       >   10
-      </MyButton>
+    <MyButton key={k}
+       sx={{width:70,height:35,backgroundColor:currQuestion>=k?'#407392': 'white',color:currQuestion>=k?'white': '#407392'}} 
+       > {k+1}
+      </MyButton>) )
+}  
 
     </ButtonGroup>
 </Paper>
@@ -325,12 +289,24 @@ top:3,marginTop:10}}>
  (currStep === currNumSteps) &&
 !(currStep===0 && currNumSteps===1) &&
 <Fab 
-    onClick={()=>{setCurrQuestion(currQuestion+1);
+    onClick={()=>{
+        
 
+        if (currQuestion+1 === maxQuestions) {
+
+            setCurrStep(0);setShowStep1(false);
+        setShowStep2(false);setShowStep3(false);
+        setShowStep4(false);setShowStep5(false);
+        setShowStep6(false);
+        navigate('/lesson-completed');
+        }
+        else {setCurrQuestion(currQuestion+1);
         setCurrStep(0);setShowStep1(false);
         setShowStep2(false);setShowStep3(false);
         setShowStep4(false);setShowStep5(false);
-        setShowStep6(false)}}
+        setShowStep6(false);}
+        }}
+
 style={{ 
     border:0,width:130,height:42,
     borderRadius:18,backgroundColor:'#407392',
@@ -457,22 +433,38 @@ style={{
     </Fab>
     <img src={require('./assets/images/feedback.png')}
       style={{width:45, height:45,marginLeft:30,marginBottom:-19}}
-       onClick={() => handleOpen()}
+       onClick={() => handleOpenFeedbackModal()}
       />
 <Modal
-        open={open}
-        onClose={handleClose}
+        open={openFeedbackModal}
+        onClose={() => handleCloseFeedbackModal()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+      
+          
+
+<Box sx={{display:'flex', flexGrow:1,width:280,height:40}}>
+<Typography sx={{marginTop:3,fontSize:18,fontFamily:'OpenSansSemiBold'}}>
             Feedback
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-          <Button style={{alignSelf:'center',color:'white',fontSize:18,fontFamily:'OpenSansBold',textTransform:'none',backgroundColor:'#407392'}}>Submit</Button>
+<HighlightOffTwoToneIcon onClick={()=>handleCloseFeedbackModal()} sx={{fontSize:20,marginLeft:26,marginTop:-2}}/>
+          </Box>
+          <Box sx={{marginTop:4}}>
+                       <TextField
+          id="outlined-multiline-static"
+          label=""
+          multiline
+          rows={10}
+          sx={{width:300,height:300}}
+          defaultValue=""
+        />
+        </Box>
+        <Box sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <Button style={{alignSelf:'center',width:130,height:42,borderRadius:20,alignSelf:'center',color:'white',fontSize:18,fontFamily:'OpenSansSemiBold',textTransform:'none',backgroundColor:'#407392'}}>Submit</Button>
+        </Box>
         </Box>
       </Modal>
 </Box>

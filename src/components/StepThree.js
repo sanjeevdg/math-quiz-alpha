@@ -39,6 +39,10 @@ aa = '\\displaylines {'+ aa + '}';
 
 bb = '\\displaylines {'+ bb + '}';
 
+console.log('RESULT222'+aa);
+console.log('EXPLANATION2222'+bb);
+
+
 return (
 <>
 <Box sx={{marginLeft:5,marginTop:5}}>
@@ -48,7 +52,6 @@ Result 2:</Typography><br/>
 
 </Box>
 
-
 { (question.Explanation2.length !== 0) &&
 
 <Box sx={{marginTop:5,marginLeft:5}}>
@@ -56,7 +59,6 @@ Result 2:</Typography><br/>
 Explanation 2:</Typography>
     
 {!showExplanationTwo && <Box sx={{display:'flex',flexGrow:1,width:300,position:'relative',left:200,top:-25}}><Typography style={{fontSize:14,color:'#000000',fontFamily:'OpenSansRegular',marginTop:2}}>Show explanation&nbsp;</Typography><ExpandCircleDownTwoToneIcon onClick={() => setShowExplanationTwo(true)}/></Box>}
-    
 
 {showExplanationTwo && 
     <>

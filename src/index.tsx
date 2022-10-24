@@ -7,6 +7,7 @@ import theme from './theme';
 import { Navigate, BrowserRouter, Routes, Route} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import MyQuiz from './MyQuiz';
+import FinalScreen from './components/FinalScreen';
 
 
 
@@ -24,6 +25,7 @@ root.render(
       
 
         <Route path="/" element={<MyQuiz />}/>
+        <Route path="/lesson-completed" element={<FinalScreen />}/>
         <Route path="/app" element={<App/>}/>
         
                 
