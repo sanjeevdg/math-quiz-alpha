@@ -30,7 +30,7 @@ Result 4 :</Typography>
 <MathComponent display={false} tex={aa} />
 </Box>
 
-{ (question.Explanation4.length !== 0) &&
+{ (question.Explanation4.length !== 0)  && (currStep === 5 && showFeedbackBtn) &&
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Explanation 4:</Typography>

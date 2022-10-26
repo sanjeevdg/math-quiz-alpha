@@ -8,7 +8,7 @@ import { Navigate, BrowserRouter, Routes, Route} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import MyQuiz from './MyQuiz';
 import FinalScreen from './components/FinalScreen';
-
+import ChapterSelectionScreen from './components/ChapterSelectionScreen';
 
 
 
@@ -27,6 +27,7 @@ root.render(
         <Route path="/" element={<MyQuiz />}/>
         <Route path="/lesson-completed" element={<FinalScreen />}/>
         <Route path="/app" element={<App/>}/>
+        <Route path="/chapter-select" element={<ChapterSelectionScreen/>}/>
         
                 
       </Routes>

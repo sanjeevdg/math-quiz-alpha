@@ -29,7 +29,7 @@ Result 3:</Typography>
 <MathComponent display={false} tex={'\\displaylines {'+restr+'}'} />
 </Box>
 
-{ (question.Explanation3.length !== 0) &&
+{ (question.Explanation3.length !== 0)  && (currStep <= 4 && showFeedbackBtn) &&
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Explanation 3:</Typography>

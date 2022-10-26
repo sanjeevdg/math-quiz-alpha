@@ -1,13 +1,13 @@
-import React,{useState,useEffect} from 'react';
+import React,{useRef, useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
+//import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import FunctionsIcon from '@mui/icons-material/Functions';
+//import Breadcrumbs from '@mui/material/Breadcrumbs';
+//import FunctionsIcon from '@mui/icons-material/Functions';
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
-import Link from '@mui/material/Link';
+//import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -23,15 +23,21 @@ import StepThree from './components/StepThree';
 import StepFour from './components/StepFour';
 import StepFive from './components/StepFive';
 import StepSix from './components/StepSix';
-import FinalScreen from './components/FinalScreen';
+//import FinalScreen from './components/FinalScreen';
 
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
-import { MathComponent } from 'mathjax-react';
+//import { MathComponent } from 'mathjax-react';
 import Modal from '@mui/material/Modal';
 
 import { useNavigate } from "react-router-dom";
+
+import toast, { Toaster } from 'react-hot-toast';
+
+
+import Alert from '@mui/material/Alert';
+
 
 const style = {
   position: 'absolute',
@@ -48,6 +54,8 @@ const style = {
 export default function MyQuiz() {
 
 
+const bottomRef = React.createRef();
+const [showMessage, setShowMessage] = useState(false);
 const [isLoaded, setIsLoaded] = useState(false);
 
 const [showStep1, setShowStep1] = useState(false);
@@ -63,8 +71,8 @@ const [currQuestion, setCurrQuestion] = useState(0);
 const [questionList, setQuestionList] = useState([]);
 
 const [progress,setProgress] = useState(0);
-const [selectedIndex,setSelectedIndex] = useState('1');
-const [currNumSteps,setCurrNumSteps] = useState(-1);
+
+const [currNumSteps,setCurrNumSteps] = useState(1);
 
 const [showStepBtn, setShowStepBtn] = useState(true);
 const [showFeedbackBtn,setShowFeedbackBtn] = useState(false);
@@ -72,12 +80,17 @@ const [showFeedbackBtn,setShowFeedbackBtn] = useState(false);
 const [openFeedbackModal, setOpenFeedbackModal] = React.useState(false);
 const [additionalTimerFlag, setAdditionalTimerFlag] = useState(false);
 
+const [currQuestionCompleteFlag, setCurrQuestionCompleteFlag] = useState(false);
+
 const [maxQuestions, setMaxQuestions] = useState(5);
 
 let navigate = useNavigate();
 
   const handleOpenFeedbackModal = () => setOpenFeedbackModal(true);
-  const handleCloseFeedbackModal = () => setOpenFeedbackModal(false);
+  const handleCloseFeedbackModal = () => {setOpenFeedbackModal(false);}
+
+const notify = () => toast('Your feedback has been recorded!');
+
 
 useEffect(() => {
 
@@ -87,23 +100,23 @@ let myresp = await axios.get('https://cgfk9jngd6.execute-api.ap-northeast-1.amaz
         
         setQuestionList(myresp.data);
         setIsLoaded(true);
-        setCurrQuestion(0);
+     //   setCurrQuestion(0);
         setMaxQuestions(10);
-if (myresp.data[currQuestion].Step1.length !== 0)
+if (myresp.data[0].Step1.length !== 0)
         setCurrNumSteps(1);
-if (myresp.data[currQuestion].Step2.length !== 0)
+if (myresp.data[0].Step2.length !== 0)
         setCurrNumSteps(2);
-if (myresp.data[currQuestion].Step3.length !==0)
+if (myresp.data[0].Step3.length !==0)
         setCurrNumSteps(3);
-if (myresp.data[currQuestion].Step4.length !==0)
+if (myresp.data[0].Step4.length !==0)
         setCurrNumSteps(4);
-if (myresp.data[currQuestion].Step5.length !== 0)
+if (myresp.data[0].Step5.length !== 0)
         setCurrNumSteps(5);
 
 }
     getQuestionList();
 
-}, []);
+}, [currQuestion]);
 
 useEffect(() => {
     if (isLoaded) {
@@ -120,41 +133,86 @@ if (questionList[currQuestion].Step5.length !== 0)
         setCurrNumSteps(5);
 }
 
-},[currQuestion]);
+},[currQuestion,isLoaded,questionList]);
 
 
 const MyButton = styled(Button)({
     backgroundColor:'white',
     color:'#407392',
 });
-
+    
   useEffect(() => {
       
         const timer = setInterval(() => {
             setProgress((oldProgress) => {
+
+
+
                 if (oldProgress === 102) {
-        if (!(currStep>=currNumSteps) && additionalTimerFlag){
+        if (!(currStep>=currNumSteps) && 
+           !currQuestionCompleteFlag){
+            
             setCurrStep(currStep+1);
-            setAdditionalTimerFlag(false);
+            setShowFeedbackBtn(true); 
+            setShowStepBtn(false);
+         //   setAdditionalTimerFlag(false);
             if(currStep===0)setShowStep1(true); 
             if(currStep===1)setShowStep2(true);
             if(currStep===2)setShowStep3(true);
             if(currStep===3)setShowStep4(true);
             if(currStep===4)setShowStep5(true);
             if(currStep===5)setShowStep6(true);
+            console.log('normal flow');
         }
+
+
+
+
+
              
-        if (currStep === currNumSteps)
-        setShowStepBtn(true);         
-        else {
+        else if (currStep === currNumSteps) {
+        setShowStepBtn(true); 
+        setShowFeedbackBtn(false);        
+  //  setAdditionalTimerFlag(false);
+        setCurrQuestionCompleteFlag(true);
+        console.log('question complete flow');
+    }
+        
+        else if (additionalTimerFlag){
+
             setShowFeedbackBtn(true);
             setShowStepBtn(false); 
+    //        setAdditionalTimerFlag(false);
+          
+                setCurrStep(currStep+1);
+            if(currStep===0)setShowStep1(true); 
+            if(currStep===1)setShowStep2(true);
+            if(currStep===2)setShowStep3(true);
+            if(currStep===3)setShowStep4(true);
+            if(currStep===4)setShowStep5(true);
+            if(currStep===5)setShowStep6(true);
+            
+            console.log('addl timer flag flow');
         }
         
-        setAdditionalTimerFlag(false);             
+        else {
+        console.log('exiting timer loop');            
+   // setAdditionalTimerFlag(false);             
+            setShowFeedbackBtn(true); 
+            setShowStepBtn(true);
+        }
         
-            
+        
+        
         setProgress(0);
+
+console.log('currStep:'+currStep);
+console.log('showStepBtn:'+showStepBtn);
+console.log('showFeedbackBtn:'+showFeedbackBtn);
+console.log('currQuestionCompleteFlag'+ currQuestionCompleteFlag);
+console.log('additionalTimerFlag:'+additionalTimerFlag);
+console.log('currnumsteps'+currNumSteps);
+        
 
                     return 0;                  
                 }
@@ -165,12 +223,19 @@ const MyButton = styled(Button)({
         return () => {
             clearInterval(timer);
         };
-    }, [currStep]);
+    }, [additionalTimerFlag]);
+
+
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+  }, [currStep]);
 
 
   return (
     <Box sx={{ backgroundColor:'#f6f6f6',width: '80%',margin:'auto',padding:1,height:850,alignSelf:'center', border:0,borderColor:'#29476a',alignItems:'center',justifyContent:'center' }}>
 
+  
         <Header />
 
         <Divider/>
@@ -208,7 +273,7 @@ const MyButton = styled(Button)({
 {isLoaded && <QuestionBody question={questionList[currQuestion]} currQuestion={currQuestion} currStep={currStep}/>}
 </Box>
 
-{(showStepBtn && !showFeedbackBtn) &&
+{(showStepBtn && !showFeedbackBtn) && !(currQuestionCompleteFlag) &&
 
 <Box sx={{ width: '100%' }}>
       <LinearProgress 
@@ -277,6 +342,8 @@ const MyButton = styled(Button)({
 
 </Box>
 
+ <Box ref={bottomRef} />
+
 </Paper>
 
 <Box style={{display:'flex',alignItems:'center', 
@@ -291,7 +358,7 @@ top:3,marginTop:10}}>
 <Fab 
     onClick={()=>{
         
-
+        setAdditionalTimerFlag(true);
         if (currQuestion+1 === maxQuestions) {
 
             setCurrStep(0);setShowStep1(false);
@@ -300,11 +367,15 @@ top:3,marginTop:10}}>
         setShowStep6(false);
         navigate('/lesson-completed');
         }
-        else {setCurrQuestion(currQuestion+1);
+        else {
+        setCurrQuestion(currQuestion+1);        
+        setCurrQuestionCompleteFlag(false);
         setCurrStep(0);setShowStep1(false);
         setShowStep2(false);setShowStep3(false);
         setShowStep4(false);setShowStep5(false);
         setShowStep6(false);}
+
+        setProgress(0);
         }}
 
 style={{ 
@@ -325,22 +396,29 @@ style={{
 <Fab 
     onClick={()=>{
 
-        setCurrStep(currStep+1);
+        
            setAdditionalTimerFlag(true); 
-        if (currStep === currNumSteps)
-        setShowStepBtn(true);         
-        else {
-            setShowFeedbackBtn(true);
-            setShowStepBtn(false); 
-        }
-        
-        
+
         if(currStep===0)setShowStep1(true); 
         if(currStep===1)setShowStep2(true);
         if(currStep===2)setShowStep3(true);
         if(currStep===3)setShowStep4(true);
         if(currStep===4)setShowStep5(true);
         if(currStep===5)setShowStep6(true);
+   
+        if (currStep === currNumSteps) {
+        setShowStepBtn(true);         
+        setCurrQuestionCompleteFlag(true);
+        setCurrStep(0);
+        }
+        else {
+            setCurrStep(currStep+1);    
+            setShowFeedbackBtn(true);
+            setShowStepBtn(false); 
+        }
+        
+        
+
 
                 setProgress(0);
 
@@ -359,12 +437,6 @@ style={{
 </Box>
 
 
-
-
-
-
-
-
 {showFeedbackBtn && !showStepBtn && 
 
 <Box sx={{backgroundColor:'white',
@@ -375,15 +447,22 @@ padding:2,width: '60%',marginTop:-4,marginLeft:25}}>
 
 <Fab 
     onClick={() => {
-        setShowFeedbackBtn(false);
-        setShowStepBtn(true);
+        
+        if (currStep === currNumSteps) {
+            setCurrQuestionCompleteFlag(true);
+            setCurrStep(0);
+        }        
+        
+    {/*    setCurrStep(currStep+1);*/}
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
         if (currStep===3)setShowStep4(true);
         if (currStep===4)setShowStep5(true);
         if (currStep===5)setShowStep6(true);
-        
+        setShowFeedbackBtn(false);
+        setShowStepBtn(true);
+        setProgress(0);
     }}
 style={{
     border:0,width:130,height:42,
@@ -394,15 +473,21 @@ style={{
     </Fab>
 
 <Fab 
-    onClick={() => {setShowFeedbackBtn(false);
+    onClick={() => {
+        setShowFeedbackBtn(false);
         setShowStepBtn(true);
-        
+        setProgress(0);
+        if (currStep === currNumSteps) {
+            setCurrQuestionCompleteFlag(true);
+        }        
+     {/*   setCurrStep(currStep+1);*/}
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
         if (currStep===3)setShowStep4(true);
         if (currStep===4)setShowStep5(true);
         if (currStep===5)setShowStep6(true);
+    
     }}
 style={{
     border:0,width:130,height:42,    
@@ -416,13 +501,18 @@ style={{
     onClick={() => {
         setShowFeedbackBtn(false);
         setShowStepBtn(true);
+                setProgress(0);
+        if (currStep === currNumSteps) {
+            setCurrQuestionCompleteFlag(true);
+        }        
+    
+       {/* setCurrStep(currStep+1);*/}
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
         if (currStep===3)setShowStep4(true);
         if (currStep===4)setShowStep5(true);
         if (currStep===5)setShowStep6(true);
-        
     }}
 style={{
     border:0,width:130,height:42,
@@ -463,16 +553,16 @@ style={{
         />
         </Box>
         <Box sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-          <Button style={{alignSelf:'center',width:130,height:42,borderRadius:20,alignSelf:'center',color:'white',fontSize:18,fontFamily:'OpenSansSemiBold',textTransform:'none',backgroundColor:'#407392'}}>Submit</Button>
+          <Button onClick={()=>{handleCloseFeedbackModal();notify();}} style={{width:130,height:42,borderRadius:20,alignSelf:'center',color:'white',fontSize:18,fontFamily:'OpenSansSemiBold',textTransform:'none',backgroundColor:'#407392'}}>Submit</Button>
         </Box>
         </Box>
       </Modal>
+
 </Box>
 
 }
 
-
-
+<Toaster/>
 
 
     </Box>

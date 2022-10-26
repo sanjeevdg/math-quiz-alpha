@@ -27,8 +27,8 @@ return (
  <svg viewBox="0 0 400 400">
         <VictoryPie
           standalone={false}
-          animate
-          animationDuration={100}
+          animate={true}
+          animationDuration={5000}
           animationEasing="ease-out"
           colorScale={['#2a7595','#e4f1f6']}
           width={400} height={400}

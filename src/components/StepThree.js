@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import Typography from '@mui/material/Typography';
 import { MathComponent } from 'mathjax-react';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone';
 import ExpandCircleDownTwoToneIcon from '@mui/icons-material/ExpandCircleDownTwoTone';
@@ -13,13 +13,13 @@ export default function StepThree({question,currStep,currQuestion,showFeedbackBt
 
 const [showExplanationTwo, setShowExplanationTwo] = useState(false);
 
-
+/*
 function replaceAll(string, search, replace) {
   return string.split(search).join(replace);
 }
 
-let aa = question.Result2;
-let bb = question.Explanation2;
+//let aa = question.Result2;
+
 
 aa = replaceAll(aa,'\n','');
 aa = replaceAll(aa,'begin','\\begin');
@@ -36,11 +36,12 @@ aa = replaceAll(aa,'\\','\/');
 aa = replaceAll(aa,'/','');
 
 aa = '\\displaylines {'+ aa + '}';
-
+*/
+let bb = question.Explanation2;
 bb = '\\displaylines {'+ bb + '}';
 
-console.log('RESULT222'+aa);
-console.log('EXPLANATION2222'+bb);
+//console.log('RESULT222'+aa);
+//console.log('EXPLANATION2222'+bb);
 
 
 return (
@@ -52,7 +53,7 @@ Result 2:</Typography><br/>
 
 </Box>
 
-{ (question.Explanation2.length !== 0) &&
+{ (question.Explanation2.length !== 0) && (currStep <= 3 && showFeedbackBtn) &&
 
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>

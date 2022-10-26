@@ -12,6 +12,9 @@ import Divider from '@mui/material/Divider';
 
 export default function QuestionBody({question,currStep,currQuestion}) {
 
+
+
+
 let qstr = question.Question;
 
 

@@ -30,7 +30,7 @@ aa = "\\displaylines {"+ aa +"}";
 return (
 <>
 <Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'flex-start',alignSelf:'flex-start',flexDirection:'column',marginLeft:5,marginTop:5}}>
-<Typography sx={{color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+<Typography  component={'span'} sx={{color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Result 1:</Typography>
 </Box>
 <Box sx={{flexDirection:'column',marginLeft:5,marginTop:5}}>
@@ -43,11 +43,11 @@ tex={aa}
 
 </Box>
 
-{ (question.Explanation1.length !== 0) &&
+{ (question.Explanation1.length !== 0)  && (currStep <= 2 && showFeedbackBtn) &&
 <Box sx={{flexDirection:'column',marginLeft:5,marginTop:5}}>
-<Typography sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+<Typography  component={'span'} sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
     Explanation 1:</Typography>
-    <Typography style={{}}>
+    <Typography>
 {!showExplanationOne && <Box sx={{display:'flex',flexGrow:1,width:300,position:'relative',left:200,top:-25}}><Typography style={{fontSize:14,color:'#000000',fontFamily:'OpenSansRegular',marginTop:2}}>Show explanation&nbsp;</Typography><ExpandCircleDownTwoToneIcon onClick={() => setShowExplanationOne(true)}/></Box>}
     </Typography>
 
@@ -62,7 +62,7 @@ tex={aa}
 
 { (currStep <= 2 && showFeedbackBtn) && (question.Step2.length !== 0) &&
 <Box sx={{marginLeft:5,marginTop:5}}>
-<Typography sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+<Typography  component={'span'} sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
 Step2:</Typography>
 <MathComponent display={true} tex={question.Step2} />
 </Box>
