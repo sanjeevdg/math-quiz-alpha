@@ -11,6 +11,7 @@ let restr = question.Step1;
 
 restr = '\\displaylines {'+ restr + '}';
 
+
 return (
 <>
 

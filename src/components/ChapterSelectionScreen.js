@@ -57,69 +57,70 @@ MATHEMATICS
 </Paper>
 
 <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'stretch',alignSelf:'stretch'}}>
-<Box>
+<Box sx={{marginLeft:1,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/functions.png')}/>
-<br/>Functions
+<Typography sx={{fontSize:12,fontFamily:'OpenSansSemiBold'}}>Functions</Typography>
 </Box>
 
-<Box>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/binomial-theorem.png')}/>
-<br/>Binomial Theorem
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>
+Binomial<br/> Theorem</Typography>
 </Box>
 
 
-<Box>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/limits.png')}/>
-<br/>Limits
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Limits</Typography>
 </Box>
 
-<Box>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/curves.png')}/>
-<br/>Area under Curves
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Area under<br/> Curves</Typography>
 </Box>
 
-<Box>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/quadratic-equations.png')}/>
-<br/>Limits
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Quadratic<br/> Equations</Typography>
 </Box>
 
-<Box>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/sequence-n-series.png')}/>
-<br/>Sequence and Series
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Sequence <br/>& Series</Typography>
 </Box>
 
 </Box>
 
-<Box sx={{display:'flex',flexDirection:'row'}}>
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'stretch',alignSelf:'stretch'}}>
+<Box sx={{marginLeft:1,marginTop:8}}>   
 <img style={{width:95,height:95}} src={require('../assets/images/continuity.png')}/>
-<br/>Continuity
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Continuity</Typography>
 </Box>
 
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/differential-equations.png')}/>
-<br/>Differential Equations
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differential<br/> Equations</Typography>
 </Box>
 
 
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/matrices-n-determinants.png')}/>
-<br/>Matrices and Determinants
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Matrices and<br/> Determinants</Typography>
 </Box>
 
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/logarithms.png')}/>
-<br/>Logarithms
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Logarithms</Typography>
 </Box>
 
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/differentiability.png')}/>
-<br/>Differentiability
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differentiability</Typography>
 </Box>
 
-<Box sx={{marginLeft:10,marginTop:8}}>
+<Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/coordinate-geometry.png')}/>
-<br/>Coordinate Geometry
+<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Coordinate<br/> Geometry</Typography>
 </Box>
 
 </Box>

@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import MyQuiz from './MyQuiz';
 import FinalScreen from './components/FinalScreen';
 import ChapterSelectionScreen from './components/ChapterSelectionScreen';
-
+import UserLandingPage from './components/UserLandingPage';
 
 
 const rootElement = document.getElementById('root')!;
@@ -28,6 +28,7 @@ root.render(
         <Route path="/lesson-completed" element={<FinalScreen />}/>
         <Route path="/app" element={<App/>}/>
         <Route path="/chapter-select" element={<ChapterSelectionScreen/>}/>
+        <Route path="/user-landing-page" element={<UserLandingPage/>}/>
         
                 
       </Routes>
