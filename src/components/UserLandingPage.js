@@ -11,54 +11,13 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Paper from '@mui/material/Paper';
 
 import LinearProgress from '@mui/material/LinearProgress';
-
+import Link from '@mui/material/Link';
 import Header from './Header';
 
 export default function UserLandingPage() {
 
 
 /*
-
-<br/><br/><br/>
-<Paper
-      style={{margin:'0 auto',marginTop:10,marginBottom:10}}
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignSelf:'center',
-        alignItems:'center',
-        flexWrap: 'wrap',        
-        width:'40%',
-        height:200,
-        backgroundColor:'#cbdce4',
-        listStyle: 'none',
-        p: 0.5,
-        m: 0,
-      }}      
-    >
-
-<Typography sx={{fontSize:30,color:'black', fontFamily:'OpenSansSemiBold'}}>
-CONGRATULATIONS!
-</Typography>
-<Button sx={{width:180,height:40,color:'white',backgroundColor:'#2a7595',fontSize:15,fontFamily:'OpenSansSemiBold',textTransform:'none',borderRadius:10}}>Continue learning</Button>
-</Paper>
-
-*/
-
-
-	
-
-return (
-<Box sx={{ backgroundColor:'#f6f6f6',width: '80%',margin:'auto',padding:1,height:850,alignSelf:'center', border:0,borderColor:'#29476a',alignItems:'center',justifyContent:'center' }}>
-
-        <Header />
-
-        <Divider/>
-
-
-<Box sx={{marginTop:4,display:'flex',
-flexDirection:'row',alignItems:'center',marginTop:3,width:'90%',height:90}}>
-
 <Box sx={{width:60,height:75,width:350,
 position:'relative',marginLeft:8,marginTop:2}}>
  <ArrowBackIcon sx={{fontSize:40}}/>
@@ -66,6 +25,33 @@ position:'relative',marginLeft:8,marginTop:2}}>
   fontFamily:'OpenSansSemiBold',
   color:'#387e9c'}}>REVIEW</Typography>
 </Box>
+<Box sx={{position:'relative',left:245,marginTop:7}}>
+<Typography sx={{fontSize:14,
+  fontFamily:'OpenSansSemiBold',
+  color:'#387e9c'}}>5%F</Typography>
+</Box>
+
+*/
+
+
+	
+
+return (
+<Box sx={{display:'flex',flexDirection:'column',
+backgroundColor:'#f6f6f6',width: '80%',
+margin:'auto',marginTop:0,padding:1,height:850,
+alignSelf:'center', border:0,borderColor:'#29476a',
+alignItems:'center',justifyContent:'center' }}>
+
+        <Header />
+
+        <Divider/>
+
+
+<Box sx={{marginTop:4,display:'flex',
+alignItems:'center',alignSelf:'center',
+justifyContent:'center',marginTop:3,width:'90%',
+height:90}}>
 
  <Box sx={{marginLeft:-6,marginTop:-2,width:350,height:70,
 display:'flex',alignItems:'center',justifyContent:'center',
@@ -76,11 +62,7 @@ fontFamily:'OpenSansRegular'}}>250 cards completed
 </Typography>
  </Box>
 
-<Box sx={{position:'relative',left:245,marginTop:7}}>
-<Typography sx={{fontSize:14,
-  fontFamily:'OpenSansSemiBold',
-  color:'#387e9c'}}>5%F</Typography>
-</Box>
+
 
 </Box>
 
@@ -107,19 +89,48 @@ fontFamily:'OpenSansRegular'}}>250 cards completed
 
 <Box sx={{display:'flex',flexDirection:'row'}}>
 
+
 <Box sx={{justifyContent:'center',marginLeft:10,marginRight:10,
 width:'20',height:35,backgroundColor:'#243b67'}}>
 &emsp;&emsp;
-<Typography sx={{color:'#387e9c',marginTop:-5.5}}>&nbsp; 40</Typography>
-<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'#387e9c',marginTop:4}}>&nbsp;&nbsp;F</Typography>
-
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;A</Typography>
 </Box>
 
-<Box sx={{marginLeft:10,marginRight:10,width:'20',
+<Box sx={{marginLeft:7,marginRight:7,width:'20',
+height:35,backgroundColor:'#14327d'}}>
+&emsp;&emsp;
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;B</Typography>
+</Box>
+
+<Box sx={{marginLeft:7,marginRight:7,width:'20',
 height:35,backgroundColor:'#2b7595'}}>
 &emsp;&emsp;
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;C</Typography>
 </Box>
 
+<Box sx={{marginLeft:7,marginRight:7,width:'20',
+height:35,backgroundColor:'#1f566d'}}>
+&emsp;&emsp;
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;D</Typography>
+</Box>
+
+<Box sx={{marginLeft:7,marginRight:7,width:'20',
+height:35,backgroundColor:'#243b67'}}>
+&emsp;&emsp;
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;E</Typography>
+</Box>
+
+<Box sx={{marginLeft:7,marginRight:7,width:'20',
+height:35,backgroundColor:'#243b67'}}>
+&emsp;&emsp;
+<Typography sx={{color:'black',marginTop:-5.5}}>&nbsp; 40</Typography>
+<Typography sx={{fontSize:14,fontFamily:'OpenSansSemiBold',color:'black',marginTop:4}}>&nbsp;&nbsp;F</Typography>
+</Box>
 
 </Box>
 
@@ -138,10 +149,13 @@ Review
 </Box>
 
 
+<Box sx={{display:'flex',alignItems:'flex-start',alignSelf:'flex-start',justifyContent:'left'}}>
+<Typography align="left" sx={{marginLeft:5,marginBottom:3,
+  fontSize:15,fontFamily:'OpenSansSemiBold'}}>
+Chapterwise Review</Typography>
+</Box>
 
-<Typography sx={{marginLeft:6,marginBottom:3,fontSize:15,fontFamily:'OpenSansSemiBold'}}>Chapterwise Review</Typography>
-
-
+<Link sx={{width:'100%'}} href="/chapter/bionomial_theorem">
 <Box sx={{display:'flex',flexDirection:'row',width:'95%',
 alignItems:'center',alignSelf:'center',justifyContent:'center',height:90}}>
 <Box>
@@ -156,8 +170,9 @@ Binomial Theorem
 30%
 </Typography>
 </Box></Box>
+</Link>
 
-
+<Link sx={{width:'100%'}} href="/chapter/sequence-n-series">
 <Box sx={{display:'flex',flexDirection:'row',width:'95%',
 alignItems:'center',alignSelf:'center',
 marginTop:3,justifyContent:'center',height:90}}>
@@ -173,14 +188,25 @@ Sequence & Series
 20%
 </Typography>
 </Box>
-
-
-
-
-
-
-
 </Box>
+</Link>
+
+
+
+
+<Box sx={{display:'flex',alignSelf:'center',
+alignItems:'center',marginTop:20,
+justifyContent:'center'}}>
+<Button sx={{backgroundColor:'#407392',
+width:180,height:36,textTransform:'none', 
+borderRadius:5,marginLeft:50}}>
+<Typography sx={{fontSize:15,color:'white',
+fontFamily:'OpenSansSemiBold'}}>
+Choose New Chapter
+</Typography>
+</Button>
+</Box>
+
 
 
 

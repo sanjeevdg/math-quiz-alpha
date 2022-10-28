@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 
 import Divider from '@mui/material/Divider';
-
+import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 
 import Header from './Header';
@@ -56,73 +56,88 @@ MATHEMATICS
 </Typography>
 </Paper>
 
+
+
 <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'stretch',alignSelf:'stretch'}}>
+
+<Link href="#">
 <Box sx={{marginLeft:1,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/functions.png')}/>
-<Typography sx={{fontSize:12,fontFamily:'OpenSansSemiBold'}}>Functions</Typography>
+<Typography align="center" sx={{fontSize:12,fontFamily:'OpenSansSemiBold'}}>Functions</Typography>
 </Box>
+</Link>
 
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/binomial-theorem.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>
 Binomial<br/> Theorem</Typography>
 </Box>
-
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/limits.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Limits</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Limits</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/curves.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Area under<br/> Curves</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Area under<br/> Curves</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/quadratic-equations.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Quadratic<br/> Equations</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Quadratic<br/> Equations</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/sequence-n-series.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Sequence <br/>& Series</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Sequence <br/>& Series</Typography>
 </Box>
-
+</Link>
 </Box>
 
 <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'stretch',alignSelf:'stretch'}}>
+<Link href="#">
 <Box sx={{marginLeft:1,marginTop:8}}>   
 <img style={{width:95,height:95}} src={require('../assets/images/continuity.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Continuity</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Continuity</Typography>
 </Box>
+</Link>
 
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/differential-equations.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differential<br/> Equations</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differential<br/> Equations</Typography>
 </Box>
-
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/matrices-n-determinants.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Matrices and<br/> Determinants</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Matrices and<br/> Determinants</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/logarithms.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Logarithms</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Logarithms</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/differentiability.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differentiability</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Differentiability</Typography>
 </Box>
-
+</Link>
+<Link href="#">
 <Box sx={{marginLeft:9,marginTop:8}}>
 <img style={{width:95,height:95}} src={require('../assets/images/coordinate-geometry.png')}/>
-<Typography sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Coordinate<br/> Geometry</Typography>
+<Typography align="center" sx={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontFamily:'OpenSansSemiBold'}}>Coordinate<br/> Geometry</Typography>
 </Box>
-
+</Link>
 </Box>
 
 

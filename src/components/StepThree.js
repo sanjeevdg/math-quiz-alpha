@@ -73,11 +73,14 @@ Explanation 2:</Typography>
 
 
 {(currStep <=3 && showFeedbackBtn) && (question.Step3.length !== 0) &&
+<>
 <Box sx={{marginLeft:5,marginTop:5}}>
-<Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
-Step 3:</Typography>
+<Typography align="left" sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step 3:</Typography></Box>
+<Box sx={{marginLeft:5,marginTop:5}}>
 <MathComponent display={true} tex={question.Step3} />
 </Box>
+</>
 }
     </>
 );

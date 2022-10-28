@@ -21,12 +21,22 @@ const [showExplanationOne, setShowExplanationOne] = useState(false);
 let aa = question.Result1;
 aa = replaceAll(aa,'\n','');
 aa = replaceAll(aa,'\\,','\\\\/');
-
 aa = replaceAll(aa,'\text','\\text');
 aa = replaceAll(aa,'\\,','\/');
-
 aa = "\\displaylines {"+ aa +"}";
 
+let bb = question.Step2;
+bb.replaceAll(bb,'\n','');
+bb = "\\displaylines {" + bb + "}";
+
+let cc = question.Explanation1;
+let cca = cc.substring(0,cc.indexOf("<img"));
+let ccb = cc.substring(cc.indexOf("<img"),cc.indexOf("/>")+2);
+let ccc = cc.substring(cc.indexOf("/>"),cc.length);
+
+console.log('cca'+cca);
+console.log('ccb'+ccb);
+console.log('ccc'+ccc);
 return (
 <>
 <Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'flex-start',alignSelf:'flex-start',flexDirection:'column',marginLeft:5,marginTop:5}}>
@@ -61,11 +71,14 @@ tex={aa}
 }
 
 { (currStep <= 2 && showFeedbackBtn) && (question.Step2.length !== 0) &&
+<>
 <Box sx={{marginLeft:5,marginTop:5}}>
-<Typography  component={'span'} sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
-Step2:</Typography>
-<MathComponent display={true} tex={question.Step2} />
+<Typography align='left' component={'span'} sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step2:</Typography></Box>
+<Box sx={{marginLeft:5,marginTop:5}}>
+<MathComponent display={false} tex={bb} />
 </Box>
+</>
 }
 
 </>

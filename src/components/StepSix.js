@@ -20,11 +20,15 @@ Result 5:</Typography>
 </Box>
 }
 { (question.Explanation5.length !== 0) &&
+<>
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
-Explanation 5:</Typography>
+Explanation 5:</Typography></Box>
+<Box sx={{marginTop:5,marginLeft:5}}>
 <MathComponent display={false} tex={question.Explanation5} />
-</Box>}
+</Box>
+</>
+}
     </>
 );
 

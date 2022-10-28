@@ -45,11 +45,14 @@ Explanation 3:</Typography>
 }
 
 { (currStep <= 4 && showFeedbackBtn) && (question.Step4.length !== 0) &&
+<>
 <Box sx={{marginTop:5,marginLeft:5}}>
 <Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
-Step 4:</Typography>
+Step 4:</Typography></Box>
+<Box sx={{marginTop:5,marginLeft:5}}>
 <MathComponent display={false} tex={question.Step4} />
 </Box>
+</>
 }
     </>
 );

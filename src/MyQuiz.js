@@ -1,4 +1,4 @@
-import React,{useRef, useState,useEffect} from 'react';
+import React,{ useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -28,15 +28,15 @@ import StepSix from './components/StepSix';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
-//import { MathComponent } from 'mathjax-react';
+import { MathComponent } from 'mathjax-react';
 import Modal from '@mui/material/Modal';
 
 import { useNavigate } from "react-router-dom";
 
 import toast, { Toaster } from 'react-hot-toast';
+//import Alert from '@mui/material/Alert';
+import Switch from '@mui/material/Switch';
 
-
-import Alert from '@mui/material/Alert';
 
 
 const style = {
@@ -54,8 +54,16 @@ const style = {
 export default function MyQuiz() {
 
 
-const bottomRef = React.createRef();
-const [showMessage, setShowMessage] = useState(false);
+// const bottomRef = React.createRef();
+
+
+ const [quickRevisionChecked, setQuickRevisionChecked] = useState(false);
+
+const [showQuickRevisionSteps, setShowQuickRevisionSteps] = useState(false);
+
+
+  
+
 const [isLoaded, setIsLoaded] = useState(false);
 
 const [showStep1, setShowStep1] = useState(false);
@@ -75,6 +83,7 @@ const [progress,setProgress] = useState(0);
 const [currNumSteps,setCurrNumSteps] = useState(1);
 
 const [showStepBtn, setShowStepBtn] = useState(true);
+const [showCheckBtn, setShowCheckBtn] = useState(false);
 const [showFeedbackBtn,setShowFeedbackBtn] = useState(false);
 
 const [openFeedbackModal, setOpenFeedbackModal] = React.useState(false);
@@ -82,7 +91,7 @@ const [additionalTimerFlag, setAdditionalTimerFlag] = useState(false);
 
 const [currQuestionCompleteFlag, setCurrQuestionCompleteFlag] = useState(false);
 
-const [maxQuestions, setMaxQuestions] = useState(5);
+const [maxQuestions, setMaxQuestions] = useState(10);
 
 let navigate = useNavigate();
 
@@ -90,6 +99,46 @@ let navigate = useNavigate();
   const handleCloseFeedbackModal = () => {setOpenFeedbackModal(false);}
 
 const notify = () => toast('Your feedback has been recorded!');
+
+
+const handleQuickRevisionChange = (event) => {
+    
+if (event.target.checked) {
+    setCurrQuestion(0);
+    setCurrStep(0);
+    setQuickRevisionChecked(true);
+    setShowStep1(false);
+    setShowStep2(false);
+    setShowStep3(false);
+    setShowStep4(false);
+    setShowStep5(false);
+    setShowStep6(false);
+    setShowStepBtn(false);
+    setShowCheckBtn(true);
+    setShowFeedbackBtn(false);
+    
+}
+else if (!event.target.checked) {
+    setCurrQuestion(0);
+    setCurrStep(0);
+    setShowStep1(false);
+    setShowStep2(false);
+    setShowStep3(false);
+    setShowStep4(false);
+    setShowStep5(false);
+    setShowStep6(false);
+    setQuickRevisionChecked(false);
+    setShowCheckBtn(false);
+    setShowStepBtn(true);
+    setShowFeedbackBtn(false);
+    window.location.reload();
+}
+    
+  };
+
+
+
+
 
 
 useEffect(() => {
@@ -102,26 +151,34 @@ let myresp = await axios.get('https://cgfk9jngd6.execute-api.ap-northeast-1.amaz
         setIsLoaded(true);
      //   setCurrQuestion(0);
         setMaxQuestions(10);
+        setAdditionalTimerFlag(true);
+
 if (myresp.data[0].Step1.length !== 0)
         setCurrNumSteps(1);
-if (myresp.data[0].Step2.length !== 0)
+else if (myresp.data[0].Step2.length !== 0)
         setCurrNumSteps(2);
-if (myresp.data[0].Step3.length !==0)
+else if (myresp.data[0].Step3.length !==0)
         setCurrNumSteps(3);
-if (myresp.data[0].Step4.length !==0)
+else if (myresp.data[0].Step4.length !==0)
         setCurrNumSteps(4);
-if (myresp.data[0].Step5.length !== 0)
+else if (myresp.data[0].Step5.length !== 0)
         setCurrNumSteps(5);
 
 }
     getQuestionList();
 
-}, [currQuestion]);
+
+}, []);
 
 useEffect(() => {
     if (isLoaded) {
 
-if (questionList[currQuestion].Step1.length !== 0)
+console.log('a'+questionList[currQuestion].Step5.length);
+console.log('b'+questionList[currQuestion].Step4.length);
+console.log('c'+questionList[currQuestion].Step3.length);
+console.log('d'+questionList[currQuestion].Step2.length);
+console.log('e'+questionList[currQuestion].Step1.length);
+
         setCurrNumSteps(1);
 if (questionList[currQuestion].Step2.length !== 0)
         setCurrNumSteps(2);
@@ -131,9 +188,14 @@ if (questionList[currQuestion].Step4.length !==0)
         setCurrNumSteps(4);
 if (questionList[currQuestion].Step5.length !== 0)
         setCurrNumSteps(5);
+
+console.log('currnumsteps::'+currNumSteps);
+
+
+
 }
 
-},[currQuestion,isLoaded,questionList]);
+},[currQuestion,isLoaded,currNumSteps,questionList]);
 
 
 const MyButton = styled(Button)({
@@ -143,19 +205,20 @@ const MyButton = styled(Button)({
     
   useEffect(() => {
       
-        const timer = setInterval(() => {
+      let timer = null;
+
+      if (isLoaded && additionalTimerFlag) {
+        timer = setInterval(() => {
             setProgress((oldProgress) => {
 
-
-
                 if (oldProgress === 102) {
-        if (!(currStep>=currNumSteps) && 
-           !currQuestionCompleteFlag){
+        if (currStep<=currNumSteps){
             
             setCurrStep(currStep+1);
             setShowFeedbackBtn(true); 
             setShowStepBtn(false);
          //   setAdditionalTimerFlag(false);
+          
             if(currStep===0)setShowStep1(true); 
             if(currStep===1)setShowStep2(true);
             if(currStep===2)setShowStep3(true);
@@ -164,47 +227,9 @@ const MyButton = styled(Button)({
             if(currStep===5)setShowStep6(true);
             console.log('normal flow');
         }
-
-
-
-
-
-             
-        else if (currStep === currNumSteps) {
-        setShowStepBtn(true); 
-        setShowFeedbackBtn(false);        
-  //  setAdditionalTimerFlag(false);
-        setCurrQuestionCompleteFlag(true);
-        console.log('question complete flow');
-    }
-        
-        else if (additionalTimerFlag){
-
-            setShowFeedbackBtn(true);
-            setShowStepBtn(false); 
-    //        setAdditionalTimerFlag(false);
-          
-                setCurrStep(currStep+1);
-            if(currStep===0)setShowStep1(true); 
-            if(currStep===1)setShowStep2(true);
-            if(currStep===2)setShowStep3(true);
-            if(currStep===3)setShowStep4(true);
-            if(currStep===4)setShowStep5(true);
-            if(currStep===5)setShowStep6(true);
-            
-            console.log('addl timer flag flow');
-        }
-        
-        else {
-        console.log('exiting timer loop');            
-   // setAdditionalTimerFlag(false);             
-            setShowFeedbackBtn(true); 
-            setShowStepBtn(true);
-        }
-        
-        
         
         setProgress(0);
+        setAdditionalTimerFlag(false);
 
 console.log('currStep:'+currStep);
 console.log('showStepBtn:'+showStepBtn);
@@ -219,17 +244,22 @@ console.log('currnumsteps'+currNumSteps);
                 return oldProgress+1;
             });
           }, 200);
+    } else { clearInterval(timer); }
   
         return () => {
             clearInterval(timer);
         };
-    }, [additionalTimerFlag]);
+    }, [additionalTimerFlag,isLoaded,currNumSteps, currQuestionCompleteFlag, currStep, showFeedbackBtn, showStepBtn]);
 
+/*
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
     bottomRef.current?.scrollIntoView({behavior: 'smooth'});
-  }, [currStep]);
+  }, [bottomRef,currStep]);
+
+*/
+
 
 
   return (
@@ -266,6 +296,17 @@ console.log('currnumsteps'+currNumSteps);
 }  
 
     </ButtonGroup>
+
+<Box sx={{marginLeft:5,marginTop:-1}}>
+  <Switch
+      checked={quickRevisionChecked}
+      onChange={handleQuickRevisionChange}
+      inputProps={{ 'aria-label': 'controlled' }}
+    />
+<Typography sx={{marginTop:-3,fontSize:12,fontFamily:'OpenSansSemiBold',color:'black'}}>
+<br/>Quick Revision
+</Typography>
+</Box>
 </Paper>
 
 <Divider/>
@@ -273,7 +314,10 @@ console.log('currnumsteps'+currNumSteps);
 {isLoaded && <QuestionBody question={questionList[currQuestion]} currQuestion={currQuestion} currStep={currStep}/>}
 </Box>
 
-{(showStepBtn && !showFeedbackBtn) && !(currQuestionCompleteFlag) &&
+
+{!quickRevisionChecked &&    
+    (showStepBtn && !showFeedbackBtn) && 
+    
 
 <Box sx={{ width: '100%' }}>
       <LinearProgress 
@@ -301,14 +345,13 @@ console.log('currnumsteps'+currNumSteps);
         p: 0.5,
         m: 0}} style={{margin:'0 auto'}}>
 
+{!(quickRevisionChecked) && 
 <Box>
-
 {(showStep1) && 
 <Box>
     <StepOne question={questionList[currQuestion]} currQuestion={currQuestion} currStep={currStep}/>
 </Box>
 }
-
 
 {(showStep2) &&
     <Box>
@@ -339,13 +382,80 @@ console.log('currnumsteps'+currNumSteps);
 <StepSix showFeedbackBtn={showFeedbackBtn} question={questionList[currQuestion]} currStep={currStep} currQuestion={currQuestion}/>
 </Box>
 }
+</Box>
+}
+
+{quickRevisionChecked && !showQuickRevisionSteps 
+&&  
+<Box sx={{position:'relative',top:5,left:5}}>
+
+<Button 
+    onClick={()=> { 
+        setShowQuickRevisionSteps(true);
+        setShowFeedbackBtn(true);        
+        setShowCheckBtn(false);
+        }}
+style={{ 
+    border:0,width:130,height:42,
+    borderRadius:18,backgroundColor:'#407392',
+    textTransform:'unset',
+    color:'white',fontSize:12,
+    fontFamily:'OpenSansSemiBold'}}>
+   Check
+    </Button>
+</Box>
+}
+
+{showQuickRevisionSteps && quickRevisionChecked &&
+    !showCheckBtn &&
+<Box>
+
+{!(questionList[currQuestion].Step1.length ===0) && 
+<Box sx={{marginLeft:5,marginTop:5}}>
+<Typography sx={{color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step 1:</Typography>
+<MathComponent display={true} tex={questionList[currQuestion].Step1} />
+</Box>
+}
+
+{!(questionList[currQuestion].Step2.length ===0) && 
+<Box sx={{marginLeft:5,marginTop:5}}>
+<Typography  component={'span'} sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step2:</Typography>
+<MathComponent display={true} tex={questionList[currQuestion].Step2} />
+</Box>
+}
+
+{!(questionList[currQuestion].Step3.length ===0) && 
+<Box sx={{marginLeft:5,marginTop:5}}>
+<Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step 3:</Typography>
+<MathComponent display={true} tex={questionList[currQuestion].Step3} />
+</Box>
+}
+{!(questionList[currQuestion].Step4.length ===0) && 
+<Box sx={{marginTop:5,marginLeft:5}}>
+<Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step 4:</Typography>
+<MathComponent display={false} tex={questionList[currQuestion].Step4} />
+</Box>
+}
+{!(questionList[currQuestion].Step5.length ===0) && 
+<Box sx={{marginTop:5,marginLeft:5}}>
+<Typography  sx={{textAlign:'left',color:'#2a7595',textDecoration:'underline',fontFamily:'OpenSansSemiBold', fontSize:18}}>
+Step 5:</Typography>
+<MathComponent display={false} tex={questionList[currQuestion].Step5} />
+</Box>
+}
 
 </Box>
 
- <Box ref={bottomRef} />
+}
+
+
+ {/* <Box ref={bottomRef} /> */}
 
 </Paper>
-
 <Box style={{display:'flex',alignItems:'center', 
 justifyContent:'center', alignSelf:'center',
 padding:5,border:1, borderColor:'#407392',
@@ -353,8 +463,10 @@ borderRadius:18,height:35, position:'relative',
 top:3,marginTop:10}}>
 
 {showStepBtn && !showFeedbackBtn && 
- (currStep === currNumSteps) &&
-!(currStep===0 && currNumSteps===1) &&
+ 
+!(currStep===0 && currNumSteps===1) && 
+currQuestionCompleteFlag &&
+!quickRevisionChecked &&
 <Fab 
     onClick={()=>{
         
@@ -392,12 +504,15 @@ style={{
 {showStepBtn && !showFeedbackBtn && 
     !(currStep === currNumSteps) &&
   (currStep+1 <= currNumSteps) &&
+  !quickRevisionChecked &&
 
 <Fab 
     onClick={()=>{
 
+     
+
+           setAdditionalTimerFlag(false); 
         
-           setAdditionalTimerFlag(true); 
 
         if(currStep===0)setShowStep1(true); 
         if(currStep===1)setShowStep2(true);
@@ -406,20 +521,10 @@ style={{
         if(currStep===4)setShowStep5(true);
         if(currStep===5)setShowStep6(true);
    
-        if (currStep === currNumSteps) {
-        setShowStepBtn(true);         
-        setCurrQuestionCompleteFlag(true);
-        setCurrStep(0);
-        }
-        else {
             setCurrStep(currStep+1);    
             setShowFeedbackBtn(true);
             setShowStepBtn(false); 
-        }
-        
-        
-
-
+     
                 setProgress(0);
 
 
@@ -436,8 +541,8 @@ style={{
 }
 </Box>
 
-
-{showFeedbackBtn && !showStepBtn && 
+{showFeedbackBtn &&  !showStepBtn 
+    && !showCheckBtn &&
 
 <Box sx={{backgroundColor:'white',
 border:1, borderColor:'#407392',borderRadius:22,
@@ -448,12 +553,24 @@ padding:2,width: '60%',marginTop:-4,marginLeft:25}}>
 <Fab 
     onClick={() => {
         
-        if (currStep === currNumSteps) {
+        if (quickRevisionChecked && showQuickRevisionSteps){
+
+            setCurrQuestion(currQuestion+1);
+            setShowQuickRevisionSteps(false);
+            setShowFeedbackBtn(false);    
+            setShowCheckBtn(true);
+                       
+
+        }
+
+        if ((currStep === currNumSteps)&& isLoaded){
+         setAdditionalTimerFlag(false);   
             setCurrQuestionCompleteFlag(true);
-            setCurrStep(0);
-        }        
-        
-    {/*    setCurrStep(currStep+1);*/}
+        }
+        else {setAdditionalTimerFlag(true);}
+
+        if (!quickRevisionChecked){    
+
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
@@ -462,6 +579,9 @@ padding:2,width: '60%',marginTop:-4,marginLeft:25}}>
         if (currStep===5)setShowStep6(true);
         setShowFeedbackBtn(false);
         setShowStepBtn(true);
+
+        }
+         
         setProgress(0);
     }}
 style={{
@@ -474,13 +594,24 @@ style={{
 
 <Fab 
     onClick={() => {
-        setShowFeedbackBtn(false);
-        setShowStepBtn(true);
-        setProgress(0);
-        if (currStep === currNumSteps) {
+
+        if (quickRevisionChecked && showQuickRevisionSteps){
+
+            setCurrQuestion(currQuestion+1);
+            setShowQuickRevisionSteps(false);
+            setShowFeedbackBtn(false);    
+            setShowCheckBtn(true);
+                       
+
+        }
+
+        if ((currStep === currNumSteps)&& isLoaded){
+         setAdditionalTimerFlag(false);   
             setCurrQuestionCompleteFlag(true);
-        }        
-     {/*   setCurrStep(currStep+1);*/}
+        }
+        else {setAdditionalTimerFlag(true);}
+        
+        if (!quickRevisionChecked){    
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
@@ -488,6 +619,11 @@ style={{
         if (currStep===4)setShowStep5(true);
         if (currStep===5)setShowStep6(true);
     
+        setShowFeedbackBtn(false);
+        setShowStepBtn(true);     
+        
+        }
+        setProgress(0);
     }}
 style={{
     border:0,width:130,height:42,    
@@ -499,20 +635,34 @@ style={{
 
 <Fab 
     onClick={() => {
-        setShowFeedbackBtn(false);
-        setShowStepBtn(true);
-                setProgress(0);
-        if (currStep === currNumSteps) {
+        if (quickRevisionChecked && showQuickRevisionSteps){
+
+            setCurrQuestion(currQuestion+1);
+            setShowQuickRevisionSteps(false);
+            setShowFeedbackBtn(false);    
+            setShowCheckBtn(true);
+                       
+
+        }
+
+        if ((currStep === currNumSteps)&& isLoaded){
+         setAdditionalTimerFlag(false);   
             setCurrQuestionCompleteFlag(true);
-        }        
-    
-       {/* setCurrStep(currStep+1);*/}
+        }
+        else {setAdditionalTimerFlag(true);}
+        
+        if (!quickRevisionChecked){    
         if (currStep===0)setShowStep1(true);            
         if (currStep===1)setShowStep2(true);
         if (currStep===2)setShowStep3(true);
         if (currStep===3)setShowStep4(true);
         if (currStep===4)setShowStep5(true);
         if (currStep===5)setShowStep6(true);
+        setShowFeedbackBtn(false);
+        setShowStepBtn(true);
+        }
+        setProgress(0);
+        
     }}
 style={{
     border:0,width:130,height:42,
