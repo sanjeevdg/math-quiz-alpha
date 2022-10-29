@@ -13,9 +13,40 @@ import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 import Link from '@mui/material/Link';
 import Header from './Header';
+import Modal from '@mui/material/Modal';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  height:250,
+  bgcolor: 'background.paper',
+  border: '1px solid #407392',
+  borderRadius:8,
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function UserLandingPage() {
 
+
+const [premiumModalOpen, setPremiumModalOpen] = useState(false);
+
+
+const handlePremiumModalOpen = () => setPremiumModalOpen(true);
+
+const handlePremiumModalClose = () => setPremiumModalOpen(false);
 
 /*
 <Box sx={{width:60,height:75,width:350,
@@ -142,7 +173,7 @@ height:35,backgroundColor:'#243b67'}}>
 justifyContent:'center'}}>
 <Button sx={{backgroundColor:'#407392',
 width:120,height:30, borderRadius:1}}>
-<Typography sx={{fontSize:14,color:'white'}}>
+<Typography component="div" sx={{fontSize:14,color:'white'}}>
 Review
 </Typography>
 </Button>
@@ -150,46 +181,70 @@ Review
 
 
 <Box sx={{display:'flex',alignItems:'flex-start',alignSelf:'flex-start',justifyContent:'left'}}>
-<Typography align="left" sx={{marginLeft:5,marginBottom:3,
+<Typography component="div" align="left" sx={{marginLeft:5,marginBottom:3,
   fontSize:15,fontFamily:'OpenSansSemiBold'}}>
 Chapterwise Review</Typography>
 </Box>
 
-<Link sx={{width:'100%'}} href="/chapter/bionomial_theorem">
+
 <Box sx={{display:'flex',flexDirection:'row',width:'95%',
 alignItems:'center',alignSelf:'center',justifyContent:'center',height:90}}>
 <Box>
+<Link sx={{width:'100%'}} href="/chapter/bionomial_theorem">
 <img src={require('../assets/images/binomial-theorem.png')}
 style={{width:90,height:90}}
-/></Box><Box sx={{width:'80%',marginLeft:2}}>
-<Typography sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
-Binomial Theorem
-</Typography>
- <LinearProgress variant="determinate" value={30} />
-<Typography sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
+/></Link>
+</Box>
+
+<Box sx={{width:'80%',marginLeft:2}}>
+<Link sx={{width:'100%'}} href="/chapter/bionomial_theorem">
+<Typography component="div" sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
+Binomial Theorem</Typography></Link>
+
+<Chip
+        avatar={<Avatar alt="buy premium access" src={require('../assets/images/premiun-crown.png')} 
+        style={{width:13,height:13}} />}
+        label="Premium"
+        sx={{backgroundColor:'#eaf1f4',zIndex:99, '&:hover': {
+      backgroundColor: '#fff',
+      color: '#2b7595',
+  }, position:'relative',left:130, top:-30,width:100,height:27,marginBottom:1}}
+        onClick={() => handlePremiumModalOpen()}
+        variant="outlined"
+      />
+
+<Link sx={{width:'100%'}} href="/chapter/bionomial_theorem"> 
+ <LinearProgress style={{marginTop:-34}} variant="determinate" value={30} />
+<Typography component="div" sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
 30%
 </Typography>
-</Box></Box>
 </Link>
+</Box></Box>
 
-<Link sx={{width:'100%'}} href="/chapter/sequence-n-series">
+
+
 <Box sx={{display:'flex',flexDirection:'row',width:'95%',
 alignItems:'center',alignSelf:'center',
 marginTop:3,justifyContent:'center',height:90}}>
 <Box>
+<Link sx={{width:'100%'}} href="/chapter/sequence-n-series">
 <img src={require('../assets/images/sequence-n-series.png')}
 style={{width:90,height:90}}
-/></Box><Box sx={{width:'80%',marginLeft:2}}>
+/></Link>
+</Box><Box sx={{width:'80%',marginLeft:2}}>
+<Link sx={{width:'100%'}} href="/chapter/sequence-n-series">
 <Typography sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
 Sequence & Series
 </Typography>
+
  <LinearProgress variant="determinate" value={20} />
 <Typography sx={{fontSize:13,fontFamily:'OpenSansRegular'}}>
 20%
 </Typography>
-</Box>
-</Box>
 </Link>
+</Box>
+</Box>
+
 
 
 
@@ -206,12 +261,106 @@ Choose New Chapter
 </Typography>
 </Button>
 </Box>
+<Modal
+        open={premiumModalOpen}
+        onClose={handlePremiumModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+
+
+        <Box sx={style}>
+
+<Paper sx={{backgroundColor:'white',
+position:'relative',left:490,border:'none',
+boxShadow:'none',
+borderRadius:15,top:-50,width:40,height:40}}>
+<img src={require('../assets/images/premiun-crown.png')}
+  style={{width:25, height:20,marginLeft:7,marginTop:5}}
+/>
+</Paper>
+
+<Box sx={{display:'flex',flexDirection:'row',
+alignItems:'center'}}>
 
 
 
+<Box sx={{display:'flex',height:248,flexDirection:'column',
+alignItems:'center',justifyContent:'center',
+width:'55%',backgroundColor:'#f5f5f5',border:0,
+marginTop:-18,marginLeft:-4,borderTopLeftRadius:28,
+borderBottomLeftRadius:28}}>
 
+<Typography sx={{marginTop:-5,fontSize:22,fontFamily:'OpenSansSemiBold',color:'black',textTransform:'underline'}}>
+BUY PREMIUM NOW
+</Typography>
+<br/>
+
+<Box sx={{marginLeft:-5,marginTop:-1,marginBottom:1,display:'flex',flexDirection:'row'}}>
+<CheckIcon/>&emsp;<Typography sx={{
+  fontSize:12,fontFamily:'OpenSansSemiBold'
+}}>204 Practice Questions</Typography>
+</Box>
+
+<Box sx={{marginLeft:1,marginBottom:1,display:'flex',flexDirection:'row'}}>
+<CheckIcon/>&emsp;<Typography sx={{
+  fontSize:12,fontFamily:'OpenSansSemiBold'
+}}>Key Strategies and Techniques</Typography>
+</Box>
+
+<Box sx={{marginLeft:-10,display:'flex',flexDirection:'row'}}>
+<CheckIcon/>&emsp;<Typography sx={{
+  fontSize:12,fontFamily:'OpenSansSemiBold'
+}}>Lifetime Access</Typography>
+</Box>
+
+
+</Box> 
+
+
+<Box sx={{width:'45%',height:248}}>
+<CloseIcon onClick={()=>handlePremiumModalClose()} 
+sx={{fontSize:20,
+  position:'relative',left:265,top:-60,
+
+
+}}/>          
+
+<Typography sx={{fontSize:23,fontFamily:'OpenSansSemiBold',
+color:'#2b7595',marginTop:-7,marginLeft:5
+}}>
+Get Premium
+</Typography>
+
+
+<Paper sx={{padding:1,marginLeft:3,border:1,
+  marginTop:2,display:'flex',boxShadow:'none',
+  flexDirection:'row',width:250}}>
+<Typography align="left" sx={{width:100,fontSize:15,fontFamily:'OpenSansSemiBold',
+color:'black'}}>
+Binomial Theorem
+</Typography>
+
+<Typography align="right" sx={{fontSize:20,fontFamily:'OpenSansSemiBold',
+color:'black',marginTop:1,marginLeft:7}}> &#8377;&nbsp;250</Typography>
+</Paper>
+
+<Button sx={{backgroundColor:'#2b7595',color:'white',
+fontFamily:'OpenSansSemiBold',fontSize:13,height:28,
+width:180,textTransform:'none',borderRadius:10,'&:hover': {
+      backgroundColor: '#2b7595',
+      color: 'white',padding:2,
+  },marginTop:3,marginLeft:8}}>
+Buy Premium Access</Button>
 
 </Box>
+         </Box>
+        </Box>
+      </Modal>
+
+</Box>
+
+
 
 
 );
